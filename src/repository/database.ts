@@ -18,6 +18,13 @@ export const connectDatabase = async () => {
       const Theater = require('../models/theater').default;
       const Show = require('../models/show').default;
 
+      // Define the association
+      Movie.hasMany(Show, { foreignKey: 'movie_id' });
+      Show.belongsTo(Movie, { foreignKey: 'movie_id' });
+
+      Theater.hasMany(Show, { foreignKey: 'theater_id' });
+      Show.belongsTo(Theater, { foreignKey: 'theater_id' });
+
       sequelize.sync();
 
       // (async () => {

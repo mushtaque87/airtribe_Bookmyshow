@@ -33,7 +33,7 @@ const Show = sequelize.define('shows', {
     },
   },
   show_time: { type: DataTypes.STRING, allowNull: false },
-  date: { type: DataTypes.DATE, allowNull: false },
+  date: { type: DataTypes.DATEONLY, allowNull: false },
 });
 
 export default Show;

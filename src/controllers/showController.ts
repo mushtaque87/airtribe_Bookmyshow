@@ -194,22 +194,41 @@ export const seedShowData = async (
     });
 };
 export const getShow = async (req: Request, res: Response): Promise<void> => {
-  log.info('getNews', req.params);
-  //   if (!req.user) {
-  //     res.status(403).send({
-  //       message: req.message,
-  //     });
-  //     return;
-  //   }
-  const { keyword } = req.params;
-  log.info('keyword', keyword);
-
-  try {
-    const allUsers = await prisma.movies.findMany();
-    console.log(allUsers);
-    res.status(200).json();
-  } catch (err) {
-    log.error(err);
-    res.status(500).send('Server error');
-  }
+  log.info('getShow', req.body);
+  Show.findAll({
+    attributes: ['show_time'],
+    where: {
+      date: req.body.date,
+    },
+    include: [
+      {
+        model: Movie,
+        attributes: ['movie_title'],
+        required: true,
+      },
+      {
+        model: Theater,
+        attributes: ['theater_name'],
+        required: true,
+        where: {
+          city: req.body.city,
+          theater_id: req.body.theater_id,
+        },
+      },
+    ],
+  })
+    .then(shows => {
+      const response: any = [];
+      shows.forEach(show => {
+        console.log(show.dataValues);
+        response.push({
+          show_time: show.dataValues.show_time,
+          movie_title: show.dataValues.movie.dataValues.movie_title,
+          theater_name: show.dataValues.theater.dataValues.theater_name,
+        });
+      });
+      console.log('Response -> ', response);
+      return res.status(200).send(response);
+    })
+    .catch(error => console.log('This error occured', error));
 };
