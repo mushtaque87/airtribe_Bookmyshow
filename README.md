@@ -17,15 +17,17 @@ The server will start and connect to MySQL database hosted locally and creates a
 
 _Fill data in the db. Make a post request and the endpoint will first fill all the movie and show releated datas in the db_
 
+![](mysql.png)
+
 ### GET /show
 
 _Get all the show timing for a particular city and theater_
 
 use the post body
 
-````{
+```{
     "city": "HYD",
     "date": "2021-12-01",
     "theater_id": 2
-}```
-````
+}
+```
