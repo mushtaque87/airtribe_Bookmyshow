@@ -194,11 +194,11 @@ export const seedShowData = async (
     });
 };
 export const getShow = async (req: Request, res: Response): Promise<void> => {
-  log.info('getShow', req.body);
+  log.info('getShow', req.body, req.query, req.params);
   Show.findAll({
     attributes: ['show_time'],
     where: {
-      date: req.body.date,
+      date: req.query.date,
     },
     include: [
       {
@@ -211,8 +211,8 @@ export const getShow = async (req: Request, res: Response): Promise<void> => {
         attributes: ['theater_name'],
         required: true,
         where: {
-          city: req.body.city,
-          theater_id: req.body.theater_id,
+          city: req.query.city,
+          theater_id: req.query.theater_id,
         },
       },
     ],
