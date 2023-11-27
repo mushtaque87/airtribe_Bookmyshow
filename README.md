@@ -25,9 +25,15 @@ _Get all the show timing for a particular city and theater and date_
 
 http://localhost:4000/show?city=HYD&theater_id=2&date=2021-12-01
 
-```[
+```
+[
     {
         "show_time": "10:00 PM",
+        "movie_title": "Jawan",
+        "theater_name": "Cinepolis Mall B"
+    },
+     {
+        "show_time": "8:00 PM",
         "movie_title": "Jawan",
         "theater_name": "Cinepolis Mall B"
     }
