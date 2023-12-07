@@ -23,7 +23,7 @@ _Fill data in the db. Make a post request and the endpoint will first fill all t
 
 _Get all the show timing for a particular city and theater and date_
 
-http://localhost:4000/show?city=HYD&theater_id=2&date=2021-12-01
+http://localhost:4000/shows?city=HYD&theater_id=2&date=2021-12-01
 
 ```
 [
