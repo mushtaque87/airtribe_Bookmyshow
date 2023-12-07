@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 //import Movie from '../models/movie';
 //import sequelize from '../../index';
 
-const sequelize = new Sequelize('bookmyshow', 'root', '', {
+const sequelize = new Sequelize('bookmyshow', 'root', 'root', {
   host: '127.0.0.1',
   dialect: 'mysql',
   logging: false,

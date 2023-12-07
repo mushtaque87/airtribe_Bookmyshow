@@ -39,3 +39,23 @@ http://localhost:4000/show?city=HYD&theater_id=2&date=2021-12-01
     }
 ]
 ```
+
+### Redis Integration
+
+The app has redis integrated to maintain a local cache to serve the response faster.
+
+Created a middleware
+
+_readCache_ and _saveCache_
+
+The server checks for the given query in the redis cache before reading from database. If the shows are available then it serves it from cache or else fetch from DB and store in cache for next query.
+
+Here is the difference in the time taken to response.
+
+![](beforeRedis.png)
+
+_It takes 115 ms to fetch from DB abd server the data_
+
+![](afterRedis.png)
+
+_It takes 15 ms to fetch from Cache abd server the data_

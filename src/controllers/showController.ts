@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 import log from '../utils/logs';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import Movie from '../models/movie';
 import Show from '../models/show';
 import Theater from '../models/theater';
+
+import { readCache, saveCache } from '../middlewares/cache';
 
 const prisma = new PrismaClient();
 
@@ -193,8 +195,20 @@ export const seedShowData = async (
       return res.status(500).send({ message: err });
     });
 };
-export const getShow = async (req: Request, res: Response): Promise<void> => {
+export const getShow = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
   log.info('getShow', req.body, req.query, req.params);
+  // readCache(req, res).then((data: any) => {
+
+  // });
+
+  if (res.statusCode === 200) {
+    return log.info('Cache hit');
+  }
+
   Show.findAll({
     attributes: ['show_time'],
     where: {
@@ -228,7 +242,9 @@ export const getShow = async (req: Request, res: Response): Promise<void> => {
         });
       });
       console.log('Response -> ', response);
-      return res.status(200).send(response);
+      res.locals.data = response;
+      //return res.status(200).send(response);
+      next();
     })
     .catch(error => console.log('This error occured', error));
 };

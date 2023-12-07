@@ -6,6 +6,7 @@ import {
   seedShowData,
   seedTheaterData,
 } from '../controllers/showController';
+import { readCache, saveCache } from '../middlewares/cache';
 
 const showRouter = express.Router();
 
@@ -14,9 +15,9 @@ const showRouter = express.Router();
 showRouter.post('/seedAllData', seedAllData);
 showRouter.post('/movies', seedMovieData);
 showRouter.post('/theater', seedTheaterData);
-showRouter.post('/show', seedShowData);
+showRouter.post('/shows', seedShowData);
 
 // Routes to fetch data from database
-showRouter.get('/show', getShow);
+showRouter.get('/shows', readCache, getShow, saveCache);
 
 export default showRouter;
