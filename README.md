@@ -15,6 +15,8 @@ The server will start and connect to MySQL database hosted locally and creates a
 
 ### POST /seedAllData
 
+http://localhost:4000/seedAllData
+
 _Fill data in the db. Make a post request and the endpoint will first fill all the movie and show releated datas in the db_
 
 ![](mysql.png)
